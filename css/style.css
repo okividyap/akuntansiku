@@ -100,6 +100,7 @@ body {
 /* --- Layout Container --- */
 .app-container {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
   width: 100%;
   position: relative;
@@ -107,6 +108,7 @@ body {
 
 /* --- Mobile Header Bar (Ultra-Compact) --- */
 .mobile-header {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1745,6 +1747,9 @@ body {
 }
 
 @media (min-width: 1024px) {
+  .app-container {
+    flex-direction: row;
+  }
   .mobile-header,
   .mobile-bottom-nav {
     display: none;
