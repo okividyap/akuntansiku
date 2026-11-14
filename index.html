@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>AkuntansiKu — Kalkulator HP Normal & 14 Kalkulator Akuntansi</title>
+  <meta name="description" content="Kalkulator akuntansi modern dan kalkulator HP standar. Dilengkapi 14 kalkulator akuntansi untuk siswa & praktisi, jurnal umum pemeriksa keseimbangan, dan riwayat lokal.">
+  <meta name="theme-color" content="#111014">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Floating Toast Notifications -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <div class="app-container">
+    
+    <!-- ==========================================
+         MOBILE TOP APP BAR (Sticky on small screens)
+         ========================================== -->
+    <header class="mobile-header">
+      <a href="#" class="brand-badge" onclick="switchTab('view-home'); return false;">
+        <div class="brand-icon">⚖️</div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">Akuntansi<span>Ku</span></span>
+          <span class="brand-sub">Kalkulator Cerdas</span>
+        </div>
+      </a>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <div class="header-status-badge" onclick="switchTab('view-guide');" title="Buka Panduan">
+          <span>💡 Panduan</span>
+        </div>
+        <div class="header-status-badge" onclick="switchTab('view-history');" title="Riwayat Tersimpan">
+          <span class="status-dot"></span>
+          <span><strong class="history-count-val" style="color: var(--accent-pink);">0</strong></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==========================================
+         DESKTOP SIDEBAR (Visible on screens >= 1024px)
+         ========================================== -->
+    <aside class="desktop-sidebar">
+      <div class="sidebar-top">
+        <a href="#" class="brand-badge" onclick="switchTab('view-home'); return false;">
+          <div class="brand-icon" style="width: 40px; height: 40px; font-size: 22px;">⚖️</div>
+          <div class="brand-text-wrap">
+            <span class="brand-title" style="font-size: 1.35rem;">Akuntansi<span>Ku</span></span>
+            <span class="brand-sub">Platform Akuntansi Praktis</span>
+          </div>
+        </a>
+
+        <ul class="sidebar-nav-list">
+          <li>
+            <button class="sidebar-nav-btn active" data-target="view-home">
+              <span style="font-size: 18px;">🏠</span>
+              <span>Beranda</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-nav-btn" data-target="view-phone-calc">
+              <span style="font-size: 18px;">📱</span>
+              <span>Kalkulator HP (Normal)</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-nav-btn" data-target="view-calculators">
+              <span style="font-size: 18px;">🧮</span>
+              <span>14 Kalkulator Akuntansi</span>
+              <span class="sidebar-badge">14</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-nav-btn" data-target="view-journal">
+              <span style="font-size: 18px;">📖</span>
+              <span>Jurnal Umum</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-nav-btn" data-target="view-history">
+              <span style="font-size: 18px;">🕒</span>
+              <span>Riwayat Lokal</span>
+              <span class="sidebar-badge history-count-val">0</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-nav-btn" data-target="view-guide">
+              <span style="font-size: 18px;">💡</span>
+              <span>Panduan & Rumus</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div style="font-size: 0.82rem; font-weight: 700; color: var(--accent-pink); margin-bottom: 2px;">AkuntansiKu — Edisi Final Resmi</div>
+        <div class="sidebar-version">14 Alat Akuntansi + Kalkulator HP</div>
+        <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 4px;">Penyimpanan di Browser Pengguna</div>
+      </div>
+    </aside>
+
+    <!-- ==========================================
+         MAIN CONTENT AREA
+         ========================================== -->
+    <main class="main-wrapper">
+      <div class="content-viewport">
+
+        <!-- ====================================================
+             VIEW 1: BERANDA (HOME)
+             ==================================================== -->
+        <section id="view-home" class="view-panel active">
+          
+          <!-- Hero Banner -->
+          <div class="hero-card">
+            <div class="hero-greeting">
+              <span>✨</span>
+              <span>Kalkulator Akuntansi Siswa & Praktisi</span>
+            </div>
+            <h1 class="hero-title">Hitung Akuntansi <span>Cepat, Akurat & Lengkap</span></h1>
+            <p class="hero-lead">Kini dilengkapi <strong>Kalkulator HP Normal</strong> dan <strong>14 Kalkulator Akuntansi Khusus</strong> (HPP, Kas Kecil, PPh Final UMKM, Gaji Bersih, TVM, Depresiasi, BEP, Rasio Keuangan, dll).</p>
+            
+            <div class="hero-stats-grid">
+              <div class="stat-box" onclick="switchTab('view-calculators');" style="cursor: pointer;">
+                <div class="stat-number">14</div>
+                <div class="stat-label">Alat Akuntansi</div>
+              </div>
+              <div class="stat-box" onclick="switchTab('view-phone-calc');" style="cursor: pointer;">
+                <div class="stat-number" style="font-size: 1rem; padding-top: 3px;">📱 HP</div>
+                <div class="stat-label">Kalkulator Normal</div>
+              </div>
+              <div class="stat-box" onclick="switchTab('view-history');" style="cursor: pointer;">
+                <div class="stat-number history-count-val" id="home-history-count">0</div>
+                <div class="stat-label">Riwayat Simpan</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Highlight: Banner Cepat Kalkulator HP Normal -->
+          <div class="card" onclick="switchTab('view-phone-calc');" style="cursor: pointer; border-color: rgba(244, 169, 200, 0.35); background: linear-gradient(135deg, #241A23 0%, #1A171F 100%); margin-bottom: 22px;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <div class="brand-icon" style="background: linear-gradient(135deg, #F4A9C8, #D87093); width: 44px; height: 44px; font-size: 22px;">📱</div>
+                <div>
+                  <div style="display: inline-flex; align-items: center; gap: 5px; background: rgba(244, 169, 200, 0.15); padding: 2px 8px; border-radius: 99px; font-size: 0.68rem; font-weight: 700; color: var(--accent-pink); margin-bottom: 4px;">
+                    FITUR BARU
+                  </div>
+                  <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--text-primary); margin-bottom: 2px;">Kalkulator Normal (Seperti di HP)</h3>
+                  <p style="font-size: 0.78rem; color: var(--text-secondary);">Dilengkapi tombol 00, 000, persen, hapus digit, dan keyboard desktop.</p>
+                </div>
+              </div>
+              <div style="color: var(--accent-pink); font-size: 20px; font-weight: bold;">➔</div>
+            </div>
+          </div>
+
+          <!-- Section: Akses Cepat Kalkulator Populer -->
+          <div class="section-header">
+            <div class="section-badge">⚡ Akses Cepat</div>
+            <h2 class="section-title">Kalkulator Populer</h2>
+            <p class="section-desc">Pilihan kalkulator yang paling sering dicari siswa dan praktisi keuangan.</p>
+          </div>
+
+          <div class="quick-grid">
+            <div class="quick-card" data-calc="hpp">
+              <div class="quick-icon">🏢</div>
+              <div class="quick-name">Harga Pokok (HPP)</div>
+              <div class="quick-desc">Beli Bersih, BTUD & Persediaan</div>
+            </div>
+            <div class="quick-card" data-calc="kaskecil">
+              <div class="quick-icon">🪙</div>
+              <div class="quick-name">Kas Kecil (Imprest)</div>
+              <div class="quick-desc">Pemeriksaan Selisih Kas & Bon</div>
+            </div>
+            <div class="quick-card" data-calc="pphumkm">
+              <div class="quick-icon">📑</div>
+              <div class="quick-name">PPh Final UMKM 0,5%</div>
+              <div class="quick-desc">Tarif PP 55/2022 & Batas 500jt</div>
+            </div>
+            <div class="quick-card" data-calc="gaji">
+              <div class="quick-icon">💵</div>
+              <div class="quick-name">Gaji Bersih (THP)</div>
+              <div class="quick-desc">Gaji Pokok, BPJS & Potongan</div>
+            </div>
+            <div class="quick-card" data-calc="persamaan">
+              <div class="quick-icon">⚖️</div>
+              <div class="quick-name">Persamaan Akuntansi</div>
+              <div class="quick-desc">Ekuitas = Aset - Liabilitas</div>
+            </div>
+            <div class="quick-card" data-calc="bep">
+              <div class="quick-icon">🎯</div>
+              <div class="quick-name">Titik Impas (BEP)</div>
+              <div class="quick-desc">BEP Unit & Omzet Rupiah</div>
+            </div>
+            <div class="quick-card" data-calc="penyusutan">
+              <div class="quick-icon">📉</div>
+              <div class="quick-name">Penyusutan Aset</div>
+              <div class="quick-desc">Metode Garis Lurus Tahunan</div>
+            </div>
+            <div class="quick-card" data-calc="rasio">
+              <div class="quick-icon">📊</div>
+              <div class="quick-name">Rasio Keuangan</div>
+              <div class="quick-desc">Current Ratio & Debt Ratio</div>
+            </div>
+          </div>
+
+          <!-- Section: Jurnal Umum Quick Teaser -->
+          <div class="card" style="border-color: rgba(244, 169, 200, 0.25); background: linear-gradient(135deg, #1C1920 0%, #251F29 100%);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="brand-icon" style="background: rgba(244, 169, 200, 0.15); color: var(--accent-pink);">📖</div>
+                <div>
+                  <h3 style="font-size: 1.05rem; font-weight: 800; color: var(--text-primary);">Pemeriksa Jurnal Umum</h3>
+                  <p style="font-size: 0.78rem; color: var(--text-secondary);">Uji keseimbangan Debit = Kredit • <span id="home-journal-status" style="color: var(--accent-pink); font-weight: 700;">0 Baris</span></p>
+                </div>
+              </div>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.4;">
+              Cek transaksi debit dan kredit tanpa selisih. Dirancang khusus dengan tampilan rapi di layar ponsel.
+            </p>
+            <button class="btn-primary" onclick="switchTab('view-journal');" style="height: 42px; font-size: 0.88rem;">
+              Buka Lembar Jurnal Umum ➔
+            </button>
+          </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             VIEW 6: KALKULATOR HP NORMAL (SMARTPHONE CALCULATOR)
+             ==================================================== -->
+        <section id="view-phone-calc" class="view-panel">
+          <div class="section-header" style="text-align: center;">
+            <div class="section-badge">📱 Standar Smartphone</div>
+            <h2 class="section-title">Kalkulator HP Normal</h2>
+            <p class="section-desc">Gunakan untuk hitungan cepat sehari-hari seperti kalkulator bawaan ponsel.</p>
+          </div>
+
+          <div class="phone-calc-wrapper">
+            <div class="phone-calc-chassis">
+              
+              <div class="phone-calc-top-bar">
+                <div class="phone-calc-brand">
+                  <span>📱</span>
+                  <span>AkuntansiKu Calc</span>
+                </div>
+                <div class="phone-calc-badge">Mode Standar</div>
+              </div>
+
+              <!-- Screen Display -->
+              <div class="phone-calc-screen">
+                <div id="phone-calc-history" class="phone-calc-history"></div>
+                <div id="phone-calc-current" class="phone-calc-current">0</div>
+              </div>
+
+              <!-- Main Keypad Grid -->
+              <div class="phone-calc-grid">
+                <!-- Row 1 -->
+                <button type="button" class="phone-calc-btn btn-fn" onclick="phoneCalcClear()">AC</button>
+                <button type="button" class="phone-calc-btn btn-fn" onclick="phoneCalcBackspace()">⌫</button>
+                <button type="button" class="phone-calc-btn btn-fn" onclick="phoneCalcToggleSign()">+/−</button>
+                <button type="button" class="phone-calc-btn btn-op" data-op="/" onclick="phoneCalcOperator('/')">÷</button>
+
+                <!-- Row 2 -->
+                <button type="button" class="phone-calc-btn" onclick="phoneCalcInput('7')">7</button>
+                <button type="button" class="phone-calc-btn" onclick="phoneCalcInput('8')">8</button>
+                <button type="button" class="phone-calc-btn" onclick="phoneCalcInput('9')">9</button>
+                <button type="button" class="phone-calc-btn btn-op" data-op="*" onclick="phoneCalcOperator('*')">×</button>
+
+                <!-- Row 3 -->
+                <button type="button" class="phone-calc-btn" onclick="phoneCalcInput('4')">4</button>
+                <button type="button" class="phone-calc-btn" onclick="phoneCalcInput('5')">5</button>
+                <button type="button" class="phone-calc-btn" onclick="phoneCalcInput('6')">6</button>
+                <button type="button" class="phone-calc-btn btn-op" data-op="-" onclick="phoneCalcOperator('-')">−</button>
+
+                <!-- Row 4 -->
+                <button type="button" class="phone-calc-btn" onclick="phoneCalcInput('1')">1</button>
+                <button type="button" class="phone-calc-btn" onclick="phoneCalcInput('2')">2</button>
+                <button type="button" class="phone-calc-btn" onclick="phoneCalcInput('3')">3</button>
+                <button type="button" class="phone-calc-btn btn-op" data-op="+" onclick="phoneCalcOperator('+')">+</button>
+
+                <!-- Row 5 -->
+                <button type="button" class="phone-calc-btn" onclick="phoneCalcInput('0')">0</button>
+                <button type="button" class="phone-calc-btn" onclick="phoneCalcDecimal()">.</button>
+                <button type="button" class="phone-calc-btn btn-fn" onclick="phoneCalcPercent()">%</button>
+                <button type="button" class="phone-calc-btn btn-equals" onclick="phoneCalcEquals()">=</button>
+              </div>
+
+              <!-- Accounting Shortcuts Bar: 00, 000, Salin, Simpan -->
+              <div class="acct-shortcuts-bar">
+                <button type="button" class="phone-calc-btn btn-acct" onclick="phoneCalcInput('00')">+00</button>
+                <button type="button" class="phone-calc-btn btn-acct" onclick="phoneCalcInput('000')">+000</button>
+                <button type="button" class="phone-calc-btn btn-acct" onclick="phoneCalcCopy()" title="Salin Angka">📋 Salin</button>
+                <button type="button" class="phone-calc-btn btn-acct" onclick="phoneCalcSaveHistory()" title="Simpan ke Riwayat">💾 Simpan</button>
+              </div>
+
+              <div style="text-align: center; margin-top: 10px; font-size: 0.7rem; color: var(--text-muted);">
+                💡 Tip: Di komputer/laptop, Anda dapat langsung mengetik dengan keyboard atau Numpad.
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ====================================================
+             VIEW 2: SEMUA KALKULATOR (14 CALCULATORS)
+             ==================================================== -->
+        <section id="view-calculators" class="view-panel">
+
+          <!-- DIRECTORY LIST OF CALCULATORS -->
+          <div id="calc-directory-wrap">
+            <div class="section-header">
+              <div class="section-badge">🧮 14 Alat Akuntansi</div>
+              <h2 class="section-title">Katalog Kalkulator Akuntansi</h2>
+              <p class="section-desc">Pilihan lengkap untuk tugas siswa, mahasiswa, maupun staf keuangan & pajak.</p>
+            </div>
+
+            <!-- Search & Filter Bar -->
+            <div class="search-filter-wrap">
+              <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="calc-search-input" placeholder="Cari kalkulator (cth: hpp, kas kecil, pph, laba)..." autocomplete="off">
+              </div>
+              <div class="category-chips">
+                <button class="chip-btn active" data-category="all" onclick="setCategoryFilter(this, 'all')">Semua (14)</button>
+                <button class="chip-btn" data-category="dasar" onclick="setCategoryFilter(this, 'dasar')">Dasar</button>
+                <button class="chip-btn" data-category="dagang" onclick="setCategoryFilter(this, 'dagang')">Dagang & HPP</button>
+                <button class="chip-btn" data-category="pajak" onclick="setCategoryFilter(this, 'pajak')">Pajak & Gaji</button>
+                <button class="chip-btn" data-category="analisis" onclick="setCategoryFilter(this, 'analisis')">Analisis Keuangan</button>
+              </div>
+            </div>
+
+            <!-- Cards Grid List -->
+            <div class="calc-cards-grid" id="calc-grid-container">
+              
+              <!-- 1. Persamaan Akuntansi -->
+              <div class="calc-selector-card" data-category="dasar" data-tags="aset liabilitas ekuitas neraca modal dasar" onclick="openCalculatorDetail('persamaan')">
+                <div class="calc-info-left">
+                  <div class="calc-avatar">⚖️</div>
+                  <div>
+                    <div class="calc-title">Persamaan Akuntansi</div>
+                    <div class="calc-snippet">Ekuitas = Aset - Liabilitas</div>
+                  </div>
+                </div>
+                <div class="calc-arrow">➔</div>
+              </div>
+
+              <!-- 2. Laba / Rugi -->
+              <div class="calc-selector-card" data-category="dasar dagang" data-tags="laba rugi pendapatan beban profit margin" onclick="openCalculatorDetail('labarugi')">
+                <div class="calc-info-left">
+                  <div class="calc-avatar">📈</div>
+                  <div>
+                    <div class="calc-title">Kalkulator Laba / Rugi</div>
+                    <div class="calc-snippet">Laba Bersih = Pendapatan - Beban</div>
+                  </div>
+                </div>
+                <div class="calc-arrow">➔</div>
+              </div>
+
+              <!-- 3. HPP (Harga Pokok Penjualan) -->
+              <div class="calc-selector-card" data-category="dagang dasar" data-tags="hpp cogs harga pokok penjualan persediaan barang dagang btud pembelian retur" onclick="openCalculatorDetail('hpp')">
+                <div class="calc-info-left">
+                  <div class="calc-avatar" style="background: rgba(244, 169, 200, 0.22); color: var(--accent-pink);">🏢</div>
+                  <div>
+                    <div class="calc-title">Harga Pokok Penjualan (HPP / COGS)</div>
+                    <div class="calc-snippet">Persediaan Awal + Beli Bersih - Persediaan Akhir</div>
+                  </div>
+                </div>
+                <div class="calc-arrow">➔</div>
+              </div>
+
+              <!-- 4. Kas Kecil (Petty Cash Imprest) -->
+              <div class="calc-selector-card" data-category="dagang dasar" data-tags="kas kecil petty cash imprest plafon bon kuitansi selisih kas fisik" onclick="openCalculatorDetail('kaskecil')">
+                <div class="calc-info-left">
+                  <div class="calc-avatar" style="background: rgba(192, 132, 252, 0.2); color: #C084FC;">🪙</div>
+                  <div>
+                    <div class="calc-title">Rekonsiliasi Kas Kecil (Petty Cash)</div>
+                    <div class="calc-snippet">Sistem Imprest & Pengujian Selisih Fisik Kas</div>
+                  </div>
+                </div>
+                <div class="calc-arrow">➔</div>
+              </div>
+
+              <!-- 5. PPh Final UMKM 0.5% -->
+              <div class="calc-selector-card" data-category="pajak" data-tags="pajak pph final umkm pp 55 pp 23 omzet 500 juta orang pribadi badan" onclick="openCalculatorDetail('pphumkm')">
+                <div class="calc-info-left">
+                  <div class="calc-avatar" style="background: rgba(52, 211, 153, 0.18); color: var(--success-color);">📑</div>
+                  <div>
+                    <div class="calc-title">PPh Final UMKM 0,5% (PP 55/2022)</div>
+                    <div class="calc-snippet">Simulasi Pajak Omzet & Batas Bebas 500 Juta</div>
+                  </div>
+                </div>
+                <div class="calc-arrow">➔</div>
+              </div>
+
+              <!-- 6. Gaji Bersih (Take Home Pay / Payroll) -->
+              <div class="calc-selector-card" data-category="pajak dasar" data-tags="gaji payroll take home pay thp bpjs ketenagakerjaan tunjangan potongan upah" onclick="openCalculatorDetail('gaji')">
+                <div class="calc-info-left">
+                  <div class="calc-avatar" style="background: rgba(96, 165, 250, 0.18); color: var(--info-color);">💵</div>
+                  <div>
+                    <div class="calc-title">Gaji Bersih Karyawan (Take Home Pay)</div>
+                    <div class="calc-snippet">Gaji Pokok, Tunjangan, BPJS & Potongan Bersih</div>
+                  </div>
+                </div>
+                <div class="calc-arrow">➔</div>
+              </div>
+
+              <!-- 7. Nilai Waktu Uang (TVM: FV & PV) -->
+              <div class="calc-selector-card" data-category="analisis" data-tags="tvm time value of money future value present value nilai sekarang masa depan bunga majemuk" onclick="openCalculatorDetail('tvm')">
+                <div class="calc-info-left">
+                  <div class="calc-avatar" style="background: rgba(251, 191, 36, 0.18); color: var(--warning-color);">⏳</div>
+                  <div>
+                    <div class="calc-title">Nilai Waktu Uang (TVM: FV & PV)</div>
+                    <div class="calc-snippet">Hitung Future Value & Present Value Investasi</div>
+                  </div>
+                </div>
+                <div class="calc-arrow">➔</div>
+              </div>
+
+              <!-- 8. Kalkulator PPN -->
+              <div class="calc-selector-card" data-category="pajak dagang" data-tags="pajak ppn dpp pertambahan nilai faktur 11 12" onclick="openCalculatorDetail('ppn')">
+                <div class="calc-info-left">
+                  <div class="calc-avatar">🧾</div>
+                  <div>
+                    <div class="calc-title">Kalkulator PPN</div>
+                    <div class="calc-snippet">PPN = DPP × Tarif Pajak (%)</div>
+                  </div>
+                </div>
+                <div class="calc-arrow">➔</div>
+              </div>
+
+              <!-- 9. Kalkulator Diskon -->
+              <div class="calc-selector-card" data-category="dagang" data-tags="diskon potongan hemat harga belanja" onclick="openCalculatorDetail('diskon')">
+                <div class="calc-info-left">
+                  <div class="calc-avatar">🏷️</div>
+                  <div>
+                    <div class="calc-title">Kalkulator Diskon</div>
+                    <div class="calc-snippet">Potongan & Harga Akhir Belanja</div>
+                  </div>
+                </div>
+                <div class="calc-arrow">➔</div>
+              </div>
+
+              <!-- 10. Kalkulator Markup -->
+              <div class="calc-selector-card" data-category="dagang" data-tags="markup hpp harga pokok harga jual margin" onclick="openCalculatorDetail('markup')">
+                <div class="calc-info-left">
+                  <div class="calc-avatar">📦</div>
+                  <div>
+                    <div class="calc-title">Kalkulator Markup</div>
+                    <div class="calc-snippet">Harga Jual Rekomendasi dari HPP</div>
+                  </div>
+                </div>
+                <div class="calc-arrow">➔</div>
+              </div>
+
+              <!-- 11. Penyusutan Garis Lurus -->
+              <div class="calc-selector-card" data-category="analisis dasar" data-tags="penyusutan depresiasi garis lurus residu aset tetap" onclick="openCalculatorDetail('penyusutan')">
+                <div class="calc-info-left">
+                  <div class="calc-avatar">📉</div>
+                  <div>
+                    <div class="calc-title">Penyusutan Aset (Garis Lurus)</div>
+                    <div class="calc-snippet">Beban Depresiasi per Tahun & Bulan</div>
+                  </div>
+                </div>
+                <div class="calc-arrow">➔</div>
+              </div>
+
+              <!-- 12. Break Even Point (BEP) -->
+              <div class="calc-selector-card" data-category="analisis dagang" data-tags="bep titik impas break even fixed cost margin kontribusi" onclick="openCalculatorDetail('bep')">
+                <div class="calc-info-left">
+                  <div class="calc-avatar">🎯</div>
+                  <div>
+                    <div class="calc-title">Titik Impas (BEP)</div>
+                    <div class="calc-snippet">BEP dalam Unit & Nilai Rupiah</div>
+                  </div>
+                </div>
+                <div class="calc-arrow">➔</div>
+              </div>
+
+              <!-- 13. Rasio Keuangan -->
+              <div class="calc-selector-card" data-category="analisis" data-tags="rasio keuangan current ratio debt ratio likuiditas solvabilitas" onclick="openCalculatorDetail('rasio')">
+                <div class="calc-info-left">
+                  <div class="calc-avatar">📊</div>
+                  <div>
+                    <div class="calc-title">Rasio Keuangan (CR & DR)</div>
+                    <div class="calc-snippet">Current Ratio & Debt Ratio</div>
+                  </div>
+                </div>
+                <div class="calc-arrow">➔</div>
+              </div>
+
+              <!-- 14. Bunga Sederhana -->
+              <div class="calc-selector-card" data-category="analisis dasar" data-tags="bunga sederhana pinjaman tabungan simple interest modal" onclick="openCalculatorDetail('bunga')">
+                <div class="calc-info-left">
+                  <div class="calc-avatar">💰</div>
+                  <div>
+                    <div class="calc-title">Bunga Sederhana</div>
+                    <div class="calc-snippet">Total Bunga & Nilai Akhir Modal</div>
+                  </div>
+                </div>
+                <div class="calc-arrow">➔</div>
+              </div>
+
+            </div>
+
+            <!-- Empty Search Message -->
+            <div id="calc-empty-search" class="empty-state" style="display: none;">
+              <div class="empty-state-icon">🔎</div>
+              <div class="empty-state-title">Kalkulator Tidak Ditemukan</div>
+              <div class="empty-state-desc">Coba kata kunci lain atau pilih tab filter "Semua".</div>
+            </div>
+          </div>
+
+
+          <!-- ====================================================
+               DEDICATED WORK AREAS FOR EACH CALCULATOR
+               ==================================================== -->
+
+          <!-- 1. PERSAMAAN AKUNTANSI -->
+          <div id="work-persamaan" class="calc-work-area">
+            <div class="back-btn-row">
+              <button class="back-btn" onclick="backToCalculatorList()">← Kembali ke Katalog</button>
+            </div>
+            
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <div class="calc-avatar">⚖️</div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 800;">Persamaan Akuntansi</h3>
+                  <div style="font-size: 0.76rem; color: var(--accent-pink); font-family: var(--font-mono);">Rumus: Ekuitas = Aset - Liabilitas</div>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Menghitung nilai ekuitas (modal bersih pemilik) berdasarkan total aset yang dimiliki dan total kewajiban/liabilitas.
+              </p>
+
+              <div id="alert-persamaan" class="alert-box alert-danger"></div>
+
+              <form class="calc-form" onsubmit="event.preventDefault(); hitungPersamaanAkuntansi();">
+                <div class="form-group">
+                  <label class="form-label">
+                    <span>Total Aset</span>
+                    <span class="form-label-hint">Semua harta lancar & tetap</span>
+                  </label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="p-aset" class="form-input auto-curr" inputmode="decimal" placeholder="10.000.000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">
+                    <span>Total Liabilitas</span>
+                    <span class="form-label-hint">Semua utang & kewajiban</span>
+                  </label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="p-liabilitas" class="form-input auto-curr" inputmode="decimal" placeholder="4.000.000">
+                  </div>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" class="btn-primary">
+                    <span>Hitung Ekuitas</span> ➔
+                  </button>
+                  <div class="btn-secondary-row">
+                    <button type="button" class="btn-secondary btn-example" onclick="setExamplePersamaan()">
+                      ✨ Contoh Soal PRD
+                    </button>
+                    <button type="reset" class="btn-secondary" onclick="hideCalcAlert('persamaan')">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Result Container -->
+              <div id="res-persamaan" class="result-card">
+                <div class="result-header">
+                  <span class="result-badge">Hasil Ekuitas</span>
+                  <button class="btn-copy-result" type="button">📋 Salin</button>
+                </div>
+                <div class="result-main-value">Rp 0</div>
+                <div class="result-sub-label">Total Nilai Ekuitas Pemilik</div>
+                <div class="formula-summary-box">
+                  <div class="formula-title">🔍 Ringkasan Rumus & Substitusi:</div>
+                  <div class="formula-text">Ekuitas = Aset - Liabilitas</div>
+                  <div class="formula-step"></div>
+                </div>
+                <div class="result-details-grid"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 2. LABA / RUGI -->
+          <div id="work-labarugi" class="calc-work-area">
+            <div class="back-btn-row">
+              <button class="back-btn" onclick="backToCalculatorList()">← Kembali ke Katalog</button>
+            </div>
+            
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <div class="calc-avatar">📈</div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 800;">Kalkulator Laba / Rugi</h3>
+                  <div style="font-size: 0.76rem; color: var(--accent-pink); font-family: var(--font-mono);">Rumus: Laba/Rugi = Pendapatan - Total Beban</div>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Menganalisis hasil operasional usaha apakah menghasilkan laba bersih positif atau rugi bersih.
+              </p>
+
+              <div id="alert-labarugi" class="alert-box alert-danger"></div>
+
+              <form class="calc-form" onsubmit="event.preventDefault(); hitungLabaRugi();">
+                <div class="form-group">
+                  <label class="form-label">Total Pendapatan (Revenue)</label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="lr-pendapatan" class="form-input auto-curr" inputmode="decimal" placeholder="8.000.000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Total Beban (Expenses)</label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="lr-beban" class="form-input auto-curr" inputmode="decimal" placeholder="5.000.000">
+                  </div>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" class="btn-primary">
+                    <span>Hitung Laba / Rugi</span> ➔
+                  </button>
+                  <div class="btn-secondary-row">
+                    <button type="button" class="btn-secondary btn-example" onclick="setExampleLabaRugi()">
+                      ✨ Contoh Soal PRD
+                    </button>
+                    <button type="reset" class="btn-secondary" onclick="hideCalcAlert('labarugi')">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Result Container -->
+              <div id="res-labarugi" class="result-card">
+                <div class="result-header">
+                  <span class="result-badge">Laba Bersih</span>
+                  <button class="btn-copy-result" type="button">📋 Salin</button>
+                </div>
+                <div class="result-main-value">Rp 0</div>
+                <div class="result-sub-label">Hasil Perhitungan Bersih</div>
+                <div class="formula-summary-box">
+                  <div class="formula-title">🔍 Ringkasan Rumus:</div>
+                  <div class="formula-text">Laba/Rugi Bersih = Pendapatan - Total Beban</div>
+                  <div class="formula-step"></div>
+                </div>
+                <div class="result-details-grid"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 3. HPP (HARGA POKOK PENJUALAN) -->
+          <div id="work-hpp" class="calc-work-area">
+            <div class="back-btn-row">
+              <button class="back-btn" onclick="backToCalculatorList()">← Kembali ke Katalog</button>
+            </div>
+            
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <div class="calc-avatar" style="background: rgba(244, 169, 200, 0.22); color: var(--accent-pink);">🏢</div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 800;">Harga Pokok Penjualan (HPP)</h3>
+                  <div style="font-size: 0.76rem; color: var(--accent-pink); font-family: var(--font-mono);">HPP = BTUD - Persediaan Akhir</div>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Menghitung HPP perusahaan dagang lengkap: Pembelian Bersih, Barang Tersedia untuk Dijual (BTUD), hingga HPP akhir.
+              </p>
+
+              <div id="alert-hpp" class="alert-box alert-danger"></div>
+
+              <form class="calc-form" onsubmit="event.preventDefault(); hitungHPP();">
+                <div class="calc-form-grid-2col">
+                  <div class="form-group">
+                    <label class="form-label">Persediaan Awal Barang</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="hpp-awal" class="form-input auto-curr" inputmode="decimal" placeholder="50.000.000">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Pembelian Bruto</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="hpp-beli" class="form-input auto-curr" inputmode="decimal" placeholder="120.000.000">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Beban Angkut Pembelian</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="hpp-ongkir" class="form-input auto-curr" inputmode="decimal" placeholder="5.000.000">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Retur & Pengurangan Beli</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="hpp-retur" class="form-input auto-curr" inputmode="decimal" placeholder="3.000.000">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Potongan Pembelian</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="hpp-pot" class="form-input auto-curr" inputmode="decimal" placeholder="2.000.000">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Persediaan Akhir Barang</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="hpp-akhir" class="form-input auto-curr" inputmode="decimal" placeholder="40.000.000">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" class="btn-primary">
+                    <span>Hitung HPP</span> ➔
+                  </button>
+                  <div class="btn-secondary-row">
+                    <button type="button" class="btn-secondary btn-example" onclick="setExampleHPP()">
+                      ✨ Contoh Soal Ujian
+                    </button>
+                    <button type="reset" class="btn-secondary" onclick="hideCalcAlert('hpp')">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Result Container -->
+              <div id="res-hpp" class="result-card">
+                <div class="result-header">
+                  <span class="result-badge">HPP Terhitung</span>
+                  <button class="btn-copy-result" type="button">📋 Salin</button>
+                </div>
+                <div class="result-main-value">Rp 0</div>
+                <div class="result-sub-label">Harga Pokok Penjualan</div>
+                <div class="formula-summary-box">
+                  <div class="formula-title">🔍 Rincian Tahapan Hitung HPP:</div>
+                  <div class="formula-text">HPP = (Persediaan Awal + Pembelian Bersih) - Persediaan Akhir</div>
+                  <div class="formula-step"></div>
+                </div>
+                <div class="result-details-grid"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 4. KAS KECIL (PETTY CASH IMPREST) -->
+          <div id="work-kaskecil" class="calc-work-area">
+            <div class="back-btn-row">
+              <button class="back-btn" onclick="backToCalculatorList()">← Kembali ke Katalog</button>
+            </div>
+            
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <div class="calc-avatar" style="background: rgba(192, 132, 252, 0.2); color: #C084FC;">🪙</div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 800;">Rekonsiliasi Kas Kecil (Petty Cash)</h3>
+                  <div style="font-size: 0.76rem; color: #C084FC; font-family: var(--font-mono);">Sistem Dana Tetap (Imprest System)</div>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Memverifikasi keabsahan fisik kas di brankas kasir kas kecil, mendeteksi selisih lebih (*cash overage*) atau selisih kurang (*cash shortage*), serta menghitung dana pengisian kembali.
+              </p>
+
+              <div id="alert-kaskecil" class="alert-box alert-danger"></div>
+
+              <form class="calc-form" onsubmit="event.preventDefault(); hitungKasKecil();">
+                <div class="form-group">
+                  <label class="form-label">
+                    <span>Saldo Plafon Kas Kecil</span>
+                    <span class="form-label-hint">Besaran dana tetap (misal Rp 5.000.000)</span>
+                  </label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="kk-plafon" class="form-input auto-curr" inputmode="decimal" placeholder="5.000.000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">
+                    <span>Total Bukti Pengeluaran Kasir</span>
+                    <span class="form-label-hint">Total kuitansi / bon yang sah</span>
+                  </label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="kk-pengeluaran" class="form-input auto-curr" inputmode="decimal" placeholder="3.800.000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">
+                    <span>Sisa Uang Fisik Kas di Brankas</span>
+                    <span class="form-label-hint">Hasil hitung fisik uang kertas & koin</span>
+                  </label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="kk-fisik" class="form-input auto-curr" inputmode="decimal" placeholder="1.200.000">
+                  </div>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" class="btn-primary">
+                    <span>Uji Kas Kecil & Pengisian</span> ➔
+                  </button>
+                  <div class="btn-secondary-row">
+                    <button type="button" class="btn-secondary btn-example" onclick="setExampleKasKecil()">
+                      ✨ Contoh Kasus Praktikum
+                    </button>
+                    <button type="reset" class="btn-secondary" onclick="hideCalcAlert('kaskecil')">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Result Container -->
+              <div id="res-kaskecil" class="result-card">
+                <div class="result-header">
+                  <span class="result-badge">Dana Pengisian Kembali</span>
+                  <button class="btn-copy-result" type="button">📋 Salin</button>
+                </div>
+                <div class="result-main-value">Rp 0</div>
+                <div class="result-sub-label">Jumlah Cek yang Harus Diterbitkan</div>
+                <div class="formula-summary-box">
+                  <div class="formula-title">🔍 Hasil Pemeriksaan Fisik:</div>
+                  <div class="formula-text">Pertanggungjawaban = Bukti Pengeluaran + Sisa Uang Fisik</div>
+                  <div class="formula-step"></div>
+                </div>
+                <div class="result-details-grid"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 5. PPH FINAL UMKM 0,5% -->
+          <div id="work-pphumkm" class="calc-work-area">
+            <div class="back-btn-row">
+              <button class="back-btn" onclick="backToCalculatorList()">← Kembali ke Katalog</button>
+            </div>
+            
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <div class="calc-avatar" style="background: rgba(52, 211, 153, 0.18); color: var(--success-color);">📑</div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 800;">PPh Final UMKM 0,5% (PP 55/2022)</h3>
+                  <div style="font-size: 0.76rem; color: var(--success-color); font-family: var(--font-mono);">Tarif 0,5% dari Omzet Bruto</div>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Menghitung pajak bulanan UMKM. Khusus Wajib Pajak Orang Pribadi, omzet kumulatif hingga <strong>Rp 500 Juta per tahun bebas pajak</strong>!
+              </p>
+
+              <div id="alert-pphumkm" class="alert-box alert-danger"></div>
+
+              <form class="calc-form" onsubmit="event.preventDefault(); hitungPPhUMKM();">
+                <div class="form-group">
+                  <label class="form-label">Jenis Wajib Pajak (Status Usaha)</label>
+                  <select id="pph-jenis-wp" class="form-input">
+                    <option value="op">Orang Pribadi (Ada Fasilitas Bebas s.d. Rp500 Juta)</option>
+                    <option value="badan">Badan Usaha (CV / PT - Langsung 0,5%)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Omzet / Peredaran Bruto Bulan Ini</label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="pph-omzet" class="form-input auto-curr" inputmode="decimal" placeholder="100.000.000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">
+                    <span>Akumulasi Omzet Bulan-Bulan Sebelumnya</span>
+                    <span class="form-label-hint">Dalam tahun pajak yang sama (kosongkan jika Jan)</span>
+                  </label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="pph-akumulasi" class="form-input auto-curr" inputmode="decimal" placeholder="600.000.000">
+                  </div>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" class="btn-primary">
+                    <span>Hitung PPh Final Bulan Ini</span> ➔
+                  </button>
+                  <div class="btn-secondary-row">
+                    <button type="button" class="btn-secondary btn-example" onclick="setExamplePPhUMKM()">
+                      ✨ Contoh Kasus Nyata
+                    </button>
+                    <button type="reset" class="btn-secondary" onclick="hideCalcAlert('pphumkm')">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Result Container -->
+              <div id="res-pphumkm" class="result-card">
+                <div class="result-header">
+                  <span class="result-badge">PPh Final Terutang</span>
+                  <button class="btn-copy-result" type="button">📋 Salin</button>
+                </div>
+                <div class="result-main-value">Rp 0</div>
+                <div class="result-sub-label">Pajak yang Harus Disetor (Kode Billing 411128-420)</div>
+                <div class="formula-summary-box">
+                  <div class="formula-title">🔍 Dasar Perhitungan Pajak:</div>
+                  <div class="formula-text">PPh Final = Dasar Pengenaan Pajak (DPP) × 0,5%</div>
+                  <div class="formula-step"></div>
+                </div>
+                <div class="result-details-grid"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 6. GAJI BERSIH (TAKE HOME PAY) -->
+          <div id="work-gaji" class="calc-work-area">
+            <div class="back-btn-row">
+              <button class="back-btn" onclick="backToCalculatorList()">← Kembali ke Katalog</button>
+            </div>
+            
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <div class="calc-avatar" style="background: rgba(96, 165, 250, 0.18); color: var(--info-color);">💵</div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 800;">Gaji Bersih Karyawan (Take Home Pay)</h3>
+                  <div style="font-size: 0.76rem; color: var(--info-color); font-family: var(--font-mono);">Penghasilan Bruto - Total Potongan</div>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Menghitung slip gaji bersih bulanan karyawan setelah dikurangi iuran BPJS Kesehatan (1%), BPJS Ketenagakerjaan (3%), kasbon, dan pajak.
+              </p>
+
+              <div id="alert-gaji" class="alert-box alert-danger"></div>
+
+              <form class="calc-form" onsubmit="event.preventDefault(); hitungGaji();">
+                <div class="calc-form-grid-2col">
+                  <div class="form-group">
+                    <label class="form-label">Gaji Pokok</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="gj-pokok" class="form-input auto-curr" inputmode="decimal" placeholder="7.000.000">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Tunjangan & Lembur</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="gj-tunjangan" class="form-input auto-curr" inputmode="decimal" placeholder="1.500.000">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Potongan BPJS Kesehatan (1%)</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="gj-bpjs-kes" class="form-input auto-curr" inputmode="decimal" placeholder="70.000">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Potongan BPJS TK (JHT 2% + JP 1%)</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="gj-bpjs-tk" class="form-input auto-curr" inputmode="decimal" placeholder="210.000">
+                    </div>
+                  </div>
+
+                  <div class="form-group" style="grid-column: span 2;">
+                    <label class="form-label">Potongan Pajak PPh 21 / Kasbon / Lainnya</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="gj-pot-lain" class="form-input auto-curr" inputmode="decimal" placeholder="120.000">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" class="btn-primary">
+                    <span>Hitung Gaji Bersih (THP)</span> ➔
+                  </button>
+                  <div class="btn-secondary-row">
+                    <button type="button" class="btn-secondary btn-example" onclick="setExampleGaji()">
+                      ✨ Contoh Slip Gaji
+                    </button>
+                    <button type="reset" class="btn-secondary" onclick="hideCalcAlert('gaji')">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Result Container -->
+              <div id="res-gaji" class="result-card">
+                <div class="result-header">
+                  <span class="result-badge" style="background: rgba(52, 211, 153, 0.2); color: var(--success-color);">Take Home Pay</span>
+                  <button class="btn-copy-result" type="button">📋 Salin</button>
+                </div>
+                <div class="result-main-value profit">Rp 0</div>
+                <div class="result-sub-label">Uang Diterima Bersih oleh Karyawan</div>
+                <div class="formula-summary-box">
+                  <div class="formula-title">🔍 Rincian Payroll:</div>
+                  <div class="formula-text">Gaji Bersih = Penghasilan Bruto - Total Potongan</div>
+                  <div class="formula-step"></div>
+                </div>
+                <div class="result-details-grid"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 7. NILAI WAKTU UANG (TVM: FV & PV) -->
+          <div id="work-tvm" class="calc-work-area">
+            <div class="back-btn-row">
+              <button class="back-btn" onclick="backToCalculatorList()">← Kembali ke Katalog</button>
+            </div>
+            
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <div class="calc-avatar" style="background: rgba(251, 191, 36, 0.18); color: var(--warning-color);">⏳</div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 800;">Nilai Waktu Uang (TVM: FV & PV)</h3>
+                  <div style="font-size: 0.76rem; color: var(--warning-color); font-family: var(--font-mono);">FV = PV × (1 + r)^n</div>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Kalkulator konsep Time Value of Money untuk Akuntansi Keuangan Menengah, penilaian obligasi, dan studi kelayakan investasi.
+              </p>
+
+              <div id="alert-tvm" class="alert-box alert-danger"></div>
+
+              <form class="calc-form" onsubmit="event.preventDefault(); hitungTVM();">
+                <div class="form-group">
+                  <label class="form-label">Tujuan Perhitungan</label>
+                  <select id="tvm-mode" class="form-input">
+                    <option value="fv">Hitung Nilai Masa Depan (Future Value / FV)</option>
+                    <option value="pv">Hitung Nilai Sekarang (Present Value / PV)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Nominal Uang Awal (PV) / Target Akhir (FV)</label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="tvm-nominal" class="form-input auto-curr" inputmode="decimal" placeholder="10.000.000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Suku Bunga Majemuk per Periode (%)</label>
+                  <div class="input-affix-wrapper has-suffix">
+                    <input type="number" id="tvm-bunga" class="form-input" placeholder="8" step="0.1" min="0">
+                    <span class="input-affix-suffix">%/periode</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Jumlah Periode (Tahun / Bulan)</label>
+                  <div class="input-affix-wrapper has-suffix">
+                    <input type="number" id="tvm-periode" class="form-input" placeholder="5" min="1" step="1">
+                    <span class="input-affix-suffix">Periode</span>
+                  </div>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" class="btn-primary">
+                    <span>Hitung Nilai Waktu Uang</span> ➔
+                  </button>
+                  <div class="btn-secondary-row">
+                    <button type="button" class="btn-secondary btn-example" onclick="setExampleTVM()">
+                      ✨ Contoh Soal TVM
+                    </button>
+                    <button type="reset" class="btn-secondary" onclick="hideCalcAlert('tvm')">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Result Container -->
+              <div id="res-tvm" class="result-card">
+                <div class="result-header">
+                  <span class="result-badge">Hasil Nilai Waktu</span>
+                  <button class="btn-copy-result" type="button">📋 Salin</button>
+                </div>
+                <div class="result-main-value">Rp 0</div>
+                <div class="result-sub-label">Hasil Perhitungan TVM</div>
+                <div class="formula-summary-box">
+                  <div class="formula-title">🔍 Ringkasan Rumus Majemuk:</div>
+                  <div class="formula-text">FV = PV × (1 + r)^n | PV = FV / (1 + r)^n</div>
+                  <div class="formula-step"></div>
+                </div>
+                <div class="result-details-grid"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 8. KALKULATOR PPN -->
+          <div id="work-ppn" class="calc-work-area">
+            <div class="back-btn-row">
+              <button class="back-btn" onclick="backToCalculatorList()">← Kembali ke Katalog</button>
+            </div>
+            
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <div class="calc-avatar">🧾</div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 800;">Kalkulator PPN</h3>
+                  <div style="font-size: 0.76rem; color: var(--accent-pink); font-family: var(--font-mono);">Rumus: PPN = DPP × Tarif PPN</div>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Menghitung nominal Pajak Pertambahan Nilai (PPN) terutang dan total harga setelah pajak.
+              </p>
+
+              <div id="alert-ppn" class="alert-box alert-danger"></div>
+
+              <form class="calc-form" onsubmit="event.preventDefault(); hitungPPN();">
+                <div class="form-group">
+                  <label class="form-label">Dasar Pengenaan Pajak (DPP)</label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="ppn-dpp" class="form-input auto-curr" inputmode="decimal" placeholder="10.000.000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">
+                    <span>Tarif PPN (%)</span>
+                    <span class="form-label-hint">Dapat disesuaikan (cth: 11% atau 12%)</span>
+                  </label>
+                  <div class="input-affix-wrapper has-suffix">
+                    <input type="number" id="ppn-tarif" class="form-input" value="12" step="0.1" min="0">
+                    <span class="input-affix-suffix">%</span>
+                  </div>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" class="btn-primary">
+                    <span>Hitung PPN</span> ➔
+                  </button>
+                  <div class="btn-secondary-row">
+                    <button type="button" class="btn-secondary btn-example" onclick="setExamplePPN()">
+                      ✨ Contoh Soal
+                    </button>
+                    <button type="reset" class="btn-secondary" onclick="hideCalcAlert('ppn')">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Result Container -->
+              <div id="res-ppn" class="result-card">
+                <div class="result-header">
+                  <span class="result-badge">PPN Terutang</span>
+                  <button class="btn-copy-result" type="button">📋 Salin</button>
+                </div>
+                <div class="result-main-value">Rp 0</div>
+                <div class="result-sub-label">Nominal Pajak yang Harus Dibayar</div>
+                <div class="formula-summary-box">
+                  <div class="formula-title">🔍 Ringkasan Rumus:</div>
+                  <div class="formula-text">PPN = DPP × Tarif PPN (%) | Total = DPP + PPN</div>
+                  <div class="formula-step"></div>
+                </div>
+                <div class="result-details-grid"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 9. KALKULATOR DISKON -->
+          <div id="work-diskon" class="calc-work-area">
+            <div class="back-btn-row">
+              <button class="back-btn" onclick="backToCalculatorList()">← Kembali ke Katalog</button>
+            </div>
+            
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <div class="calc-avatar">🏷️</div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 800;">Kalkulator Diskon</h3>
+                  <div style="font-size: 0.76rem; color: var(--accent-pink); font-family: var(--font-mono);">Rumus: Akhir = Harga Awal - Potongan</div>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Menghitung nominal potongan harga yang dihemat dan total harga yang harus dibayar.
+              </p>
+
+              <div id="alert-diskon" class="alert-box alert-danger"></div>
+
+              <form class="calc-form" onsubmit="event.preventDefault(); hitungDiskon();">
+                <div class="form-group">
+                  <label class="form-label">Harga Awal</label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="disc-harga" class="form-input auto-curr" inputmode="decimal" placeholder="100.000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Persentase Diskon (%)</label>
+                  <div class="input-affix-wrapper has-suffix">
+                    <input type="number" id="disc-persen" class="form-input" placeholder="10" step="0.1" min="0" max="100">
+                    <span class="input-affix-suffix">%</span>
+                  </div>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" class="btn-primary">
+                    <span>Hitung Diskon</span> ➔
+                  </button>
+                  <div class="btn-secondary-row">
+                    <button type="button" class="btn-secondary btn-example" onclick="setExampleDiskon()">
+                      ✨ Contoh Soal PRD
+                    </button>
+                    <button type="reset" class="btn-secondary" onclick="hideCalcAlert('diskon')">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Result Container -->
+              <div id="res-diskon" class="result-card">
+                <div class="result-header">
+                  <span class="result-badge">Harga Setelah Diskon</span>
+                  <button class="btn-copy-result" type="button">📋 Salin</button>
+                </div>
+                <div class="result-main-value">Rp 0</div>
+                <div class="result-sub-label">Harga Akhir Pembayaran</div>
+                <div class="formula-summary-box">
+                  <div class="formula-title">🔍 Ringkasan Rumus:</div>
+                  <div class="formula-text">Potongan = Harga Awal × Diskon% | Akhir = Harga Awal - Potongan</div>
+                  <div class="formula-step"></div>
+                </div>
+                <div class="result-details-grid"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 10. KALKULATOR MARKUP -->
+          <div id="work-markup" class="calc-work-area">
+            <div class="back-btn-row">
+              <button class="back-btn" onclick="backToCalculatorList()">← Kembali ke Katalog</button>
+            </div>
+            
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <div class="calc-avatar">📦</div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 800;">Kalkulator Markup</h3>
+                  <div style="font-size: 0.76rem; color: var(--accent-pink); font-family: var(--font-mono);">Rumus: Harga Jual = HPP + (HPP × Markup%)</div>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Menetapkan harga jual barang berdasarkan modal harga pokok (HPP) ditambah persentase keuntungan yang ditargetkan.
+              </p>
+
+              <div id="alert-markup" class="alert-box alert-danger"></div>
+
+              <form class="calc-form" onsubmit="event.preventDefault(); hitungMarkup();">
+                <div class="form-group">
+                  <label class="form-label">Harga Pokok (HPP / Biaya Modal)</label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="mk-hpp" class="form-input auto-curr" inputmode="decimal" placeholder="50.000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Persentase Markup (%)</label>
+                  <div class="input-affix-wrapper has-suffix">
+                    <input type="number" id="mk-persen" class="form-input" placeholder="25" step="0.1" min="0">
+                    <span class="input-affix-suffix">%</span>
+                  </div>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" class="btn-primary">
+                    <span>Hitung Harga Jual</span> ➔
+                  </button>
+                  <div class="btn-secondary-row">
+                    <button type="button" class="btn-secondary btn-example" onclick="setExampleMarkup()">
+                      ✨ Contoh Soal
+                    </button>
+                    <button type="reset" class="btn-secondary" onclick="hideCalcAlert('markup')">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Result Container -->
+              <div id="res-markup" class="result-card">
+                <div class="result-header">
+                  <span class="result-badge">Rekomendasi Harga Jual</span>
+                  <button class="btn-copy-result" type="button">📋 Salin</button>
+                </div>
+                <div class="result-main-value">Rp 0</div>
+                <div class="result-sub-label">Harga Jual per Produk</div>
+                <div class="formula-summary-box">
+                  <div class="formula-title">🔍 Ringkasan Rumus:</div>
+                  <div class="formula-text">Untung = HPP × Markup% | Harga Jual = HPP + Untung</div>
+                  <div class="formula-step"></div>
+                </div>
+                <div class="result-details-grid"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 11. PENYUSUTAN GARIS LURUS -->
+          <div id="work-penyusutan" class="calc-work-area">
+            <div class="back-btn-row">
+              <button class="back-btn" onclick="backToCalculatorList()">← Kembali ke Katalog</button>
+            </div>
+            
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <div class="calc-avatar">📉</div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 800;">Penyusutan Aset (Garis Lurus)</h3>
+                  <div style="font-size: 0.76rem; color: var(--accent-pink); font-family: var(--font-mono);">Rumus: (Perolehan - Residu) / Umur Manfaat</div>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Menghitung alokasi beban penyusutan tahunan dan bulanan aset tetap dengan metode garis lurus (Straight-Line Method).
+              </p>
+
+              <div id="alert-penyusutan" class="alert-box alert-danger"></div>
+
+              <form class="calc-form" onsubmit="event.preventDefault(); hitungPenyusutan();">
+                <div class="form-group">
+                  <label class="form-label">Harga Perolehan Aset</label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="dep-perolehan" class="form-input auto-curr" inputmode="decimal" placeholder="12.000.000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">
+                    <span>Nilai Residu / Sisa</span>
+                    <span class="form-label-hint">Nilai taksiran di akhir umur</span>
+                  </label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="dep-residu" class="form-input auto-curr" inputmode="decimal" placeholder="2.000.000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Umur Manfaat (Tahun)</label>
+                  <div class="input-affix-wrapper has-suffix">
+                    <input type="number" id="dep-umur" class="form-input" placeholder="5" min="1" step="1">
+                    <span class="input-affix-suffix">Tahun</span>
+                  </div>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" class="btn-primary">
+                    <span>Hitung Beban Penyusutan</span> ➔
+                  </button>
+                  <div class="btn-secondary-row">
+                    <button type="button" class="btn-secondary btn-example" onclick="setExamplePenyusutan()">
+                      ✨ Contoh Soal PRD
+                    </button>
+                    <button type="reset" class="btn-secondary" onclick="hideCalcAlert('penyusutan')">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Result Container -->
+              <div id="res-penyusutan" class="result-card">
+                <div class="result-header">
+                  <span class="result-badge">Beban Depresiasi</span>
+                  <button class="btn-copy-result" type="button">📋 Salin</button>
+                </div>
+                <div class="result-main-value">Rp 0</div>
+                <div class="result-sub-label">Alokasi Beban per Tahun</div>
+                <div class="formula-summary-box">
+                  <div class="formula-title">🔍 Ringkasan Rumus:</div>
+                  <div class="formula-text">Penyusutan = (Harga Perolehan - Nilai Residu) / Umur Manfaat</div>
+                  <div class="formula-step"></div>
+                </div>
+                <div class="result-details-grid"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 12. BREAK EVEN POINT (BEP) -->
+          <div id="work-bep" class="calc-work-area">
+            <div class="back-btn-row">
+              <button class="back-btn" onclick="backToCalculatorList()">← Kembali ke Katalog</button>
+            </div>
+            
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <div class="calc-avatar">🎯</div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 800;">Titik Impas (BEP)</h3>
+                  <div style="font-size: 0.76rem; color: var(--accent-pink); font-family: var(--font-mono);">Rumus: BEP Unit = Biaya Tetap / (Harga - Variabel)</div>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Menghitung jumlah unit minimal yang harus terjual agar usaha tidak mengalami kerugian (titik impas).
+              </p>
+
+              <div id="alert-bep" class="alert-box alert-danger"></div>
+
+              <form class="calc-form" onsubmit="event.preventDefault(); hitungBEP();">
+                <div class="form-group">
+                  <label class="form-label">Total Biaya Tetap (Fixed Cost)</label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="bep-tetap" class="form-input auto-curr" inputmode="decimal" placeholder="1.000.000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Harga Jual per Unit</label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="bep-jual" class="form-input auto-curr" inputmode="decimal" placeholder="50.000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Biaya Variabel per Unit</label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="bep-variabel" class="form-input auto-curr" inputmode="decimal" placeholder="30.000">
+                  </div>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" class="btn-primary">
+                    <span>Hitung Titik Impas</span> ➔
+                  </button>
+                  <div class="btn-secondary-row">
+                    <button type="button" class="btn-secondary btn-example" onclick="setExampleBEP()">
+                      ✨ Contoh Soal PRD
+                    </button>
+                    <button type="reset" class="btn-secondary" onclick="hideCalcAlert('bep')">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Result Container -->
+              <div id="res-bep" class="result-card">
+                <div class="result-header">
+                  <span class="result-badge">BEP Tercapai</span>
+                  <button class="btn-copy-result" type="button">📋 Salin</button>
+                </div>
+                <div class="result-main-value">0 Unit</div>
+                <div class="result-sub-label">Volume Penjualan Minimum</div>
+                <div class="formula-summary-box">
+                  <div class="formula-title">🔍 Ringkasan Rumus:</div>
+                  <div class="formula-text">BEP Unit = Biaya Tetap / (Harga Jual - Biaya Variabel)</div>
+                  <div class="formula-step"></div>
+                </div>
+                <div class="result-details-grid"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 13. RASIO KEUANGAN -->
+          <div id="work-rasio" class="calc-work-area">
+            <div class="back-btn-row">
+              <button class="back-btn" onclick="backToCalculatorList()">← Kembali ke Katalog</button>
+            </div>
+            
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <div class="calc-avatar">📊</div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 800;">Rasio Keuangan (CR & DR)</h3>
+                  <div style="font-size: 0.76rem; color: var(--accent-pink); font-family: var(--font-mono);">Current Ratio & Debt Ratio</div>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Mengevaluasi tingkat likuiditas jangka pendek (Current Ratio) dan solvabilitas utang (Debt Ratio) perusahaan.
+              </p>
+
+              <div id="alert-rasio" class="alert-box alert-danger"></div>
+
+              <form class="calc-form" onsubmit="event.preventDefault(); hitungRasio();">
+                <div class="calc-form-grid-2col">
+                  <div class="form-group">
+                    <label class="form-label">Aset Lancar</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="r-aset-lancar" class="form-input auto-curr" inputmode="decimal" placeholder="10.000.000">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Liabilitas Lancar</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="r-liab-lancar" class="form-input auto-curr" inputmode="decimal" placeholder="5.000.000">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Total Liabilitas</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="r-total-liab" class="form-input auto-curr" inputmode="decimal" placeholder="6.000.000">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Total Aset</label>
+                    <div class="input-affix-wrapper has-prefix">
+                      <span class="input-affix">Rp</span>
+                      <input type="text" id="r-total-aset" class="form-input auto-curr" inputmode="decimal" placeholder="15.000.000">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" class="btn-primary">
+                    <span>Hitung Rasio</span> ➔
+                  </button>
+                  <div class="btn-secondary-row">
+                    <button type="button" class="btn-secondary btn-example" onclick="setExampleRasio()">
+                      ✨ Contoh Soal PRD
+                    </button>
+                    <button type="reset" class="btn-secondary" onclick="hideCalcAlert('rasio')">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Result Container -->
+              <div id="res-rasio" class="result-card">
+                <div class="result-header">
+                  <span class="result-badge">Analisis Rasio</span>
+                  <button class="btn-copy-result" type="button">📋 Salin</button>
+                </div>
+                <div class="result-main-value">0.00x</div>
+                <div class="result-sub-label">Hasil Perhitungan Rasio</div>
+                <div class="formula-summary-box">
+                  <div class="formula-title">🔍 Ringkasan Rumus:</div>
+                  <div class="formula-text">CR = Aset Lancar / Liab Lancar | DR = (Total Liab / Total Aset) × 100%</div>
+                  <div class="formula-step"></div>
+                </div>
+                <div class="result-details-grid"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- 14. BUNGA SEDERHANA -->
+          <div id="work-bunga" class="calc-work-area">
+            <div class="back-btn-row">
+              <button class="back-btn" onclick="backToCalculatorList()">← Kembali ke Katalog</button>
+            </div>
+            
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <div class="calc-avatar">💰</div>
+                <div>
+                  <h3 style="font-size: 1.15rem; font-weight: 800;">Bunga Sederhana</h3>
+                  <div style="font-size: 0.76rem; color: var(--accent-pink); font-family: var(--font-mono);">Rumus: Bunga = Modal × Suku Bunga × Waktu</div>
+                </div>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Menghitung total pertambahan bunga dan nilai akumulasi akhir dari pokok modal dalam jangka waktu tahunan.
+              </p>
+
+              <div id="alert-bunga" class="alert-box alert-danger"></div>
+
+              <form class="calc-form" onsubmit="event.preventDefault(); hitungBunga();">
+                <div class="form-group">
+                  <label class="form-label">Modal Pokok Awal</label>
+                  <div class="input-affix-wrapper has-prefix">
+                    <span class="input-affix">Rp</span>
+                    <input type="text" id="b-modal" class="form-input auto-curr" inputmode="decimal" placeholder="5.000.000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Suku Bunga per Tahun (%)</label>
+                  <div class="input-affix-wrapper has-suffix">
+                    <input type="number" id="b-persen" class="form-input" placeholder="6" step="0.1" min="0">
+                    <span class="input-affix-suffix">%/thn</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Jangka Waktu (Tahun)</label>
+                  <div class="input-affix-wrapper has-suffix">
+                    <input type="number" id="b-waktu" class="form-input" placeholder="2" step="0.5" min="0.1">
+                    <span class="input-affix-suffix">Tahun</span>
+                  </div>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" class="btn-primary">
+                    <span>Hitung Nilai Akhir</span> ➔
+                  </button>
+                  <div class="btn-secondary-row">
+                    <button type="button" class="btn-secondary btn-example" onclick="setExampleBunga()">
+                      ✨ Contoh Soal
+                    </button>
+                    <button type="reset" class="btn-secondary" onclick="hideCalcAlert('bunga')">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Result Container -->
+              <div id="res-bunga" class="result-card">
+                <div class="result-header">
+                  <span class="result-badge">Total Nilai Akhir</span>
+                  <button class="btn-copy-result" type="button">📋 Salin</button>
+                </div>
+                <div class="result-main-value">Rp 0</div>
+                <div class="result-sub-label">Akumulasi Modal + Bunga</div>
+                <div class="formula-summary-box">
+                  <div class="formula-title">🔍 Ringkasan Rumus:</div>
+                  <div class="formula-text">Bunga = Modal × Suku Bunga × Waktu | Total = Modal + Bunga</div>
+                  <div class="formula-step"></div>
+                </div>
+                <div class="result-details-grid"></div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             VIEW 3: JURNAL UMUM (LEDGER)
+             ==================================================== -->
+        <section id="view-journal" class="view-panel">
+          <div class="section-header">
+            <div class="section-badge">📖 Pembukuan</div>
+            <h2 class="section-title">Jurnal Umum</h2>
+            <p class="section-desc">Catat baris transaksi dan periksa keseimbangan antara total debit dan total kredit secara real-time.</p>
+          </div>
+
+          <!-- Status Meter & Keseimbangan -->
+          <div class="journal-meter-card">
+            <div id="journal-status-banner" class="balance-status-banner empty">
+              <div class="status-indicator-wrap">
+                <span id="j-status-icon" class="status-badge-icon">📝</span>
+                <div>
+                  <div id="j-status-title" class="status-text-title">Jurnal Masih Kosong</div>
+                  <div id="j-status-desc" class="status-text-desc">Tambahkan baris transaksi untuk memeriksa keseimbangan</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="journal-summary-grid">
+              <div class="sum-metric-card">
+                <div class="sum-metric-title">Total Debit</div>
+                <div class="sum-metric-number debit-color" id="j-total-debit">Rp 0</div>
+              </div>
+              <div class="sum-metric-card">
+                <div class="sum-metric-title">Total Kredit</div>
+                <div class="sum-metric-number credit-color" id="j-total-credit">Rp 0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Journal Presets -->
+          <div style="margin-bottom: 16px;">
+            <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">
+              ⚡ Contoh Cepat Transaksi Seimbang:
+            </div>
+            <div class="journal-presets-bar">
+              <button class="btn-journal-preset" onclick="loadJournalPreset('modal')">+ Setoran Modal Pemilik (Rp10jt)</button>
+              <button class="btn-journal-preset" onclick="loadJournalPreset('peralatan')">+ Beli Peralatan Tunai (Rp3,5jt)</button>
+              <button class="btn-journal-preset" onclick="loadJournalPreset('beban')">+ Bayar Gaji Tunai (Rp2jt)</button>
+            </div>
+          </div>
+
+          <!-- Input Form: Jurnal Baris -->
+          <div class="card">
+            <h3 style="font-size: 0.98rem; font-weight: 800; margin-bottom: 12px; color: var(--text-primary);">
+              Tambah Baris Jurnal
+            </h3>
+
+            <div id="alert-journal" class="alert-box alert-danger"></div>
+
+            <form class="calc-form" onsubmit="event.preventDefault(); addJournalEntry();">
+              
+              <!-- Segmented Control: Pilihan Debit atau Kredit -->
+              <div class="form-group">
+                <label class="form-label">
+                  <span>Posisi Transaksi</span>
+                  <span class="form-label-hint">Pilih salah satu sisi</span>
+                </label>
+                <div class="segmented-control">
+                  <button type="button" id="btn-seg-debit" class="segment-btn active segment-debit" onclick="setJournalPosition('debit')">
+                    📌 DEBIT
+                  </button>
+                  <button type="button" id="btn-seg-credit" class="segment-btn segment-credit" onclick="setJournalPosition('credit')">
+                    📌 KREDIT
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Tanggal Transaksi</label>
+                <input type="date" id="j-date" class="form-input">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">
+                  <span>Nama Akun / Keterangan</span>
+                  <span class="form-label-hint">Cth: Kas, Utang, Modal</span>
+                </label>
+                <input type="text" id="j-account" class="form-input" list="account-suggestions" placeholder="Pilih atau ketik nama akun...">
+                <datalist id="account-suggestions">
+                  <option value="Kas"></option>
+                  <option value="Piutang Usaha"></option>
+                  <option value="Persediaan Barang Dagang"></option>
+                  <option value="Perlengkapan"></option>
+                  <option value="Peralatan Kantor"></option>
+                  <option value="Utang Usaha"></option>
+                  <option value="Utang Bank"></option>
+                  <option value="Modal Pemilik"></option>
+                  <option value="Pendapatan Jasa"></option>
+                  <option value="Beban Gaji"></option>
+                  <option value="Beban Sewa"></option>
+                  <option value="Beban Listrik & Air"></option>
+                </datalist>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Nominal Rupiah</label>
+                <div class="input-affix-wrapper has-prefix">
+                  <span class="input-affix">Rp</span>
+                  <input type="text" id="j-amount" class="form-input auto-curr" inputmode="decimal" placeholder="1.000.000">
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 10px; margin-top: 6px;">
+                <button type="submit" class="btn-primary" style="height: 46px;">
+                  + Tambah ke Jurnal
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Entries Header & Action Toolbar -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin: 18px 0 10px; flex-wrap: wrap; gap: 8px;">
+            <div style="font-size: 0.88rem; font-weight: 750; color: var(--text-primary);">Daftar Baris Transaksi</div>
+            <div class="toolbar-actions">
+              <button type="button" class="btn-tool btn-tool-excel" onclick="exportJournalCSV()" title="Unduh laporan jurnal ke Microsoft Excel / Spreadsheet">📥 Ekspor Excel</button>
+              <button type="button" class="btn-tool btn-tool-print" onclick="printJournal()" title="Cetak atau simpan ke PDF">🖨️ Cetak / PDF</button>
+              <button type="button" class="btn-clear-history" onclick="clearJournal()">🗑️ Bersihkan</button>
+            </div>
+          </div>
+
+          <div id="journal-list-container"></div>
+        </section>
+
+
+        <!-- ====================================================
+             VIEW 4: RIWAYAT PERHITUNGAN (HISTORY)
+             ==================================================== -->
+        <section id="view-history" class="view-panel">
+          <div class="section-header">
+            <div class="section-badge">🕒 Penyimpanan Lokal</div>
+            <h2 class="section-title">Riwayat Perhitungan</h2>
+            <p class="section-desc">Hasil kalkulasi tersimpan otomatis di browser perangkat ini (maksimal 50 riwayat terbaru).</p>
+          </div>
+
+          <div class="history-controls-row" style="flex-wrap: wrap; gap: 8px;">
+            <div class="history-count-badge">
+              Tersimpan: <strong class="history-count-val">0</strong> / 50 kalkulasi
+            </div>
+            <div class="toolbar-actions">
+              <button type="button" class="btn-tool btn-tool-excel" onclick="exportHistoryCSV()" title="Ekspor daftar riwayat ke Excel (CSV)">📥 Ekspor CSV</button>
+              <button type="button" class="btn-clear-history" onclick="clearAllHistory()">🗑️ Hapus Semua</button>
+            </div>
+          </div>
+
+          <div id="history-container"></div>
+        </section>
+
+
+        <!-- ====================================================
+             VIEW 5: PANDUAN PENGGUNAAN (GUIDE)
+             ==================================================== -->
+        <section id="view-guide" class="view-panel">
+          <div class="section-header">
+            <div class="section-badge">💡 Pusat Bantuan</div>
+            <h2 class="section-title">Panduan & Rumus Akuntansi</h2>
+            <p class="section-desc">Petunjuk penggunaan, prinsip saldo normal akuntansi, dan daftar rumus yang digunakan.</p>
+          </div>
+
+          <div class="guide-accordion">
+
+            <!-- Item 1: Cara Penggunaan -->
+            <div class="guide-item open">
+              <div class="guide-header" onclick="toggleGuideItem(this)">
+                <div style="display: flex; align-items: center;">
+                  <div class="guide-icon-pill">📱</div>
+                  <span>Cara Menggunakan AkuntansiKu</span>
+                </div>
+                <span class="guide-arrow">▼</span>
+              </div>
+              <div class="guide-body">
+                <ol style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+                  <li><strong>Kalkulator HP Normal:</strong> Buka tab Kalkulator HP untuk operasi matematika standar (+, −, ×, ÷, %, 00, 000).</li>
+                  <li><strong>14 Kalkulator Khusus Akuntansi:</strong> Buka tab Kalkulator untuk memilih alat seperti HPP, Kas Kecil, PPh Final UMKM, Gaji Bersih, BEP, dan lainnya.</li>
+                  <li><strong>Tombol Contoh Soal:</strong> Di setiap kalkulator tersedia tombol <em>✨ Contoh Soal</em> untuk menguji dengan kasus riil sekali klik.</li>
+                  <li><strong>Periksa Jurnal:</strong> Gunakan tab Jurnal Umum untuk menguji keseimbangan debit dan kredit transaksi akuntansi.</li>
+                </ol>
+              </div>
+            </div>
+
+            <!-- Item 2: Saldo Normal Akuntansi -->
+            <div class="guide-item">
+              <div class="guide-header" onclick="toggleGuideItem(this)">
+                <div style="display: flex; align-items: center;">
+                  <div class="guide-icon-pill">⚖️</div>
+                  <span>Aturan Saldo Normal (Debit vs Kredit)</span>
+                </div>
+                <span class="guide-arrow">▼</span>
+              </div>
+              <div class="guide-body">
+                <p style="margin-bottom: 10px;">Aturan penambahan dan pengurangan saldo akun dalam akuntansi berpasangan (double-entry):</p>
+                <div style="overflow-x: auto;">
+                  <table class="normal-balance-table">
+                    <thead>
+                      <tr>
+                        <th>Kelompok Akun</th>
+                        <th>Saldo Normal</th>
+                        <th>Bertambah (+)</th>
+                        <th>Berkurang (-)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>Harta / Aset</strong> (Kas, Piutang, dll)</td>
+                        <td>DEBIT</td>
+                        <td style="color: var(--accent-pink);">DEBIT</td>
+                        <td>Kredit</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Kewajiban / Liabilitas</strong> (Utang)</td>
+                        <td>KREDIT</td>
+                        <td style="color: #C084FC;">KREDIT</td>
+                        <td>Debit</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Ekuitas / Modal</strong></td>
+                        <td>KREDIT</td>
+                        <td style="color: #C084FC;">KREDIT</td>
+                        <td>Debit</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Pendapatan (Revenue)</strong></td>
+                        <td>KREDIT</td>
+                        <td style="color: #C084FC;">KREDIT</td>
+                        <td>Debit</td>
+                      </tr>
+                      <tr>
+                        <td><strong>Beban (Expenses)</strong></td>
+                        <td>DEBIT</td>
+                        <td style="color: var(--accent-pink);">DEBIT</td>
+                        <td>Kredit</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 3: Rumus Lengkap -->
+            <div class="guide-item">
+              <div class="guide-header" onclick="toggleGuideItem(this)">
+                <div style="display: flex; align-items: center;">
+                  <div class="guide-icon-pill">📐</div>
+                  <span>Rumus-Rumus Akuntansi Praktis</span>
+                </div>
+                <span class="guide-arrow">▼</span>
+              </div>
+              <div class="guide-body">
+                <ul style="padding-left: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 0.82rem;">
+                  <li><strong>Harga Pokok Penjualan (HPP):</strong> <code>HPP = (Persediaan Awal + Pembelian Bersih) - Persediaan Akhir</code></li>
+                  <li><strong>Kas Kecil (Imprest):</strong> <code>Pengisian Kembali = Total Bon Pengeluaran</code> | <code>Selisih = (Fisik + Bon) - Plafon</code></li>
+                  <li><strong>PPh Final UMKM:</strong> <code>PPh = DPP Kena Pajak × 0,5%</code> (Bebas s.d. Rp 500 Juta untuk OP)</li>
+                  <li><strong>Gaji Bersih (THP):</strong> <code>THP = Penghasilan Bruto - (BPJS + Pajak + Potongan Lain)</code></li>
+                  <li><strong>TVM (Future Value):</strong> <code>FV = PV × (1 + r)^n</code></li>
+                  <li><strong>Persamaan Akuntansi:</strong> <code>Ekuitas = Aset - Liabilitas</code></li>
+                  <li><strong>Laba / Rugi:</strong> <code>Laba/Rugi Bersih = Pendapatan - Total Beban</code></li>
+                  <li><strong>Break Even Point:</strong> <code>BEP Unit = Biaya Tetap / (Harga Jual - Biaya Variabel)</code></li>
+                  <li><strong>Penyusutan Garis Lurus:</strong> <code>Penyusutan = (Harga Perolehan - Nilai Residu) / Umur Manfaat</code></li>
+                  <li><strong>Current Ratio:</strong> <code>Current Ratio = Aset Lancar / Liabilitas Lancar</code></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Item 4: Jaminan Kualitas Edisi Final Resmi -->
+            <div class="guide-item">
+              <div class="guide-header" onclick="toggleGuideItem(this)">
+                <div style="display: flex; align-items: center;">
+                  <div class="guide-icon-pill">🏆</div>
+                  <span>Fitur & Jaminan Kualitas Edisi Final Resmi</span>
+                </div>
+                <span class="guide-arrow">▼</span>
+              </div>
+              <div class="guide-body">
+                <p style="margin-bottom: 8px;">
+                  Aplikasi ini adalah <strong>Edisi Final Resmi</strong> yang telah disempurnakan dengan standar penuh untuk siswa, mahasiswa, dan profesional:
+                </p>
+                <ul style="padding-left: 18px; display: flex; flex-direction: column; gap: 6px;">
+                  <li><strong>Penyimpanan Permanen:</strong> Seluruh baris Jurnal Umum dan Riwayat Kalkulasi kini otomatis tersimpan di <code>localStorage</code> peramban Anda dan tidak akan terhapus saat halaman di-refresh.</li>
+                  <li><strong>Ekspor Dokumen:</strong> Dilengkapi fitur ekspor ke format Microsoft Excel (CSV) dan opsi Cetak / Simpan PDF langsung dari browser ponsel atau laptop.</li>
+                  <li><strong>Dapat Di-install (PWA):</strong> Siap ditambahkan ke Home Screen smartphone Anda sebagai web app mandiri.</li>
+                  <li><strong>Keamanan 100% Offline:</strong> Seluruh perhitungan berjalan di perangkat lokal Anda tanpa pengiriman data keuangan ke server eksternal.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- ==========================================
+         MOBILE BOTTOM NAVIGATION (Fixed at bottom)
+         Thumb-Zone Optimized for Phones
+         ========================================== -->
+    <nav class="mobile-bottom-nav">
+      <button class="nav-item-btn active" data-target="view-home">
+        <span class="nav-icon">🏠</span>
+        <span>Beranda</span>
+      </button>
+
+      <button class="nav-item-btn" data-target="view-phone-calc">
+        <span class="nav-icon">📱</span>
+        <span>Kalkulator</span>
+      </button>
+
+      <button class="nav-item-btn" data-target="view-calculators">
+        <span class="nav-icon">🧮</span>
+        <span>Akuntansi</span>
+      </button>
+
+      <button class="nav-item-btn" data-target="view-journal">
+        <span class="nav-icon">📖</span>
+        <span>Jurnal</span>
+      </button>
+
+      <button class="nav-item-btn" data-target="view-history">
+        <span class="nav-icon">🕒</span>
+        <span>Riwayat</span>
+        <span class="nav-badge history-count-val">0</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- Application Logic -->
+  <script src="js/app.js"></script>
+</body>
+</html>
